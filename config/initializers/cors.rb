@@ -9,10 +9,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://65dcc024f725f617b94caafa--recipe-4-you.netlify.app', 'localhost:3000'
+    origins 'https://recipe-4-you.netlify.app', 'http://localhost:3001', 'http://localhost:3000'
 
     resource '*',
              headers: :any,
-             methods: %i[get post put patch delete options head]
+             methods: %i[get post put patch delete options head],
+             expose: %w[Sec-Fetch-Dest Sec-Fetch-Mode Sec-Fetch-Site Sec-Gpc]
   end
 end

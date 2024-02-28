@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_141112) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_214054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_141112) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ingredients"], name: "index_recipes_on_ingredients", opclass: :gin_trgm_ops, using: :gin
     t.index ["ingredients"], name: "ingredients_search_index", opclass: :gin_trgm_ops, using: :gin
   end
 

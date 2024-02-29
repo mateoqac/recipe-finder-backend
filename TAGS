@@ -1,0 +1,58 @@
+
+app/mailers/application_mailer.rb,67
+class ApplicationMailer < ActionMailer::BaseApplicationMailer3,0
+
+app/models/recipe.rb,44
+class Recipe < ApplicationRecordRecipe3,0
+
+app/models/application_record.rb,67
+class ApplicationRecord < ActiveRecord::BaseApplicationRecord3,0
+
+app/jobs/application_job.rb,58
+class ApplicationJob < ActiveJob::BaseApplicationJob3,0
+
+app/controllers/application_controller.rb,78
+class ApplicationController < ActionController::APIApplicationController3,0
+
+app/controllers/api/v1/recipes_controller.rb,380
+module ApiApi3,0
+  module V1V14,0
+  module V1Api::V14,0
+    class RecipesController < ApplicationControllerRecipesController5,0
+    class RecipesController < ApplicationControllerApi::V1::RecipesController5,0
+      def indexindex8,0
+      def findfind14,0
+      def default_per_pagedefault_per_page32,0
+      def user_input_ingredientsuser_input_ingredients36,0
+
+app/channels/application_cable/connection.rb,195
+module ApplicationCableApplicationCable3,0
+  class Connection < ActionCable::Connection::BaseConnection4,0
+  class Connection < ActionCable::Connection::BaseApplicationCable::Connection4,0
+
+app/channels/application_cable/channel.rb,177
+module ApplicationCableApplicationCable3,0
+  class Channel < ActionCable::Channel::BaseChannel4,0
+  class Channel < ActionCable::Channel::BaseApplicationCable::Channel4,0
+
+config/application.rb,189
+module RecipeFinderBackendRecipeFinderBackend11,0
+  class Application < Rails::ApplicationApplication12,0
+  class Application < Rails::ApplicationRecipeFinderBackend::Application12,0
+
+db/migrate/20240223141112_add_full_text_index_to_recipes.rb,117
+class AddFullTextIndexToRecipes < ActiveRecord::Migration[7.1]AddFullTextIndexToRecipes3,0
+  def changechange4,0
+
+db/migrate/20240223121221_enable_pg_trgm_extension.rb,121
+class EnablePgTrgmExtension < ActiveRecord::Migration[6.0]EnablePgTrgmExtension3,0
+  def upup4,0
+  def downdown8,0
+
+db/migrate/20240228214054_add_index_to_ingredients.rb,109
+class AddIndexToIngredients < ActiveRecord::Migration[7.1]AddIndexToIngredients3,0
+  def changechange4,0
+
+db/migrate/20240223135957_create_recipes.rb,93
+class CreateRecipes < ActiveRecord::Migration[7.1]CreateRecipes3,0
+  def changechange4,0

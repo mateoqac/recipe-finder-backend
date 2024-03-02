@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'debug'
-
 JSON_FILE_PATH = 'public/recipes-en.json'
 OUNCE_PATTERN = /\((\d+\s*[^\)]+)\)/
 FULL_PATTERN = /(\d*\s*[½¼¾⅔⅝⅓⅛⅕⅖⅗⅘⅙⅚⅞⅐⅑⅒]|\d*)?\s*(\b\w+\b)?\s*(.*)/

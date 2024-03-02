@@ -8,8 +8,6 @@ NUMBER_PATTERN = /^\d|^[½¼¾⅔⅝⅓⅛⅕⅖⅗⅘⅙⅚⅞⅐⅑⅒]/
 namespace :db do
   desc 'Load recipes from JSON file and save to the database'
   task load_recipes: :environment do
-    Rake::Task['db:reset'].invoke
-    Rake::Task['db:migrate'].invoke
     json_data = File.read(JSON_FILE_PATH)
     recipes = JSON.parse(json_data)
     errors = []

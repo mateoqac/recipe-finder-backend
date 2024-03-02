@@ -33,6 +33,8 @@ gem 'bootsnap', require: false
 
 gem 'will_paginate'
 
+gem 'active_model_serializers'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -44,6 +46,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
@@ -58,4 +61,4 @@ group :test do
   gem 'shoulda-matchers', '~> 6.0'
 end
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
+gem 'dockerfile-rails', '>= 1.6', group: :development

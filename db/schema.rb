@@ -25,8 +25,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_214054) do
   create_table "recipe_ingredients", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "ingredient_id", null: false
-    t.integer "quantity", null: false
-    t.string "unit", null: false
+    t.string "quantity", null: false
+    t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"

@@ -8,9 +8,9 @@ class CreateRecipes < ActiveRecord::Migration[7.1]
       t.integer :prep_time, null: false
       t.text :ingredients
       t.float :ratings
-      t.string :cuisine, null: false
-      t.string :category, null: false
-      t.string :author, null: false
+      t.string :cuisine, null: true
+      t.string :category, null: true
+      t.string :author, null: true
       t.string :image, null: false
 
       t.timestamps

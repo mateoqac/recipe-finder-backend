@@ -3,8 +3,6 @@
 module Api
   module V1
     class RecipesController < ApplicationController
-      # before_action :load_recipes, only: %i[index find]
-
       def index
         @recipes = Recipe.paginate(page: params[:page], per_page: default_per_page)
         render json: { data: @recipes,
@@ -12,15 +10,12 @@ module Api
       end
 
       def find
-        query = user_input_ingredients.map do
-          'recipes.ingredients ILIKE ?'
-        end.join(' AND ')
-        pattern = user_input_ingredients.map { |ingredient| "%#{ingredient}%" }
-
-        @matching_recipes = Recipe
-                            .where(query, *pattern)
-                            .order(ratings: :desc)
-                            .paginate(page: params[:page], per_page: default_per_page)
+        @matching_recipes = Recipe.joins(:ingredients)
+                                  .select('recipes.*, COUNT(ingredients.id) AS ingredient_count')
+                                  .where(ingredients: { name: user_input_ingredients })
+                                  .group('recipes.id')
+                                  .order('ingredient_count DESC')
+                                  .paginate(page: params[:page], per_page: default_per_page)
 
         render json: { data: @matching_recipes,
                        meta: { total_pages: @matching_recipes.total_pages,

@@ -10,9 +10,9 @@ module Api
       end
 
       def find
-        @matching_recipes = Recipe.joins(:ingredients)
-                                  .select('recipes.*, COUNT(ingredients.id) AS ingredient_count')
-                                  .where(ingredients: { name: user_input_ingredients })
+        @matching_recipes = Recipe.joins(:recipe_ingredients)
+                                  .select('recipes.*, COUNT(recipe_ingredients.id) AS ingredient_count')
+                                  .where(recipe_ingredients: { ingredient_id: Ingredient.where(name: user_input_ingredients) })
                                   .group('recipes.id')
                                   .order('ingredient_count DESC')
                                   .paginate(page: params[:page], per_page: default_per_page)

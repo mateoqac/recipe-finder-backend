@@ -26,16 +26,16 @@ RSpec.describe Api::V1::RecipesController, type: :request do
     let!(:recipe_with_pizza) { create(:recipe, ingredients_list: ['pizza']) }
     let!(:recipe_tomato_no_pizza) { create(:recipe, ingredients_list: ['tomato']) }
 
-    let!(:recipe_with_pizza_cheese_tomato) { create(:recipe, ingredients_list: %w[pizza cheese tomato]) }
-    let!(:recipe_with_pizza_cheese) { create(:recipe, ingredients_list: %w[pizza cheese]) }
-    let!(:recipe_with_tomato) { create(:recipe, ingredients_list: ['tomato']) }
+    let!(:swedish_kringles) { create(:recipe, ingredients_list: %w[butter almond eggs sugar cream flour]) }
+    let!(:miniature_chocolate_eclairs) { create(:recipe, ingredients_list: %w[butter eggs sugar water chocolate]) }
+    let!(:classic_cinnamon_rolls) { create(:recipe, ingredients_list: %w[butter sugar cinnamon]) }
 
     it 'returns matching recipes based on a single ingredient' do
       post '/api/v1/recipes/find', params: { ingredient: 'pizza' }
       response_recipe_data = response.parsed_body['data']
 
       expect(response).to have_http_status(:success)
-      expect(response_recipe_data.count).to eq(4)
+      expect(response_recipe_data.count).to eq(2)
     end
 
     it 'returns matching recipes based on multiple ingredients' do
@@ -43,15 +43,18 @@ RSpec.describe Api::V1::RecipesController, type: :request do
       response_recipe_data = response.parsed_body['data']
 
       expect(response).to have_http_status(:success)
-      expect(response_recipe_data.count).to eq(6)
+      expect(response_recipe_data.count).to eq(3)
     end
 
     it 'returns recipes in descending order based on ingredient count' do
-      post '/api/v1/recipes/find', params: { ingredient: 'pizza, tomato, cheese' }
+      post '/api/v1/recipes/find', params: { ingredient: 'butter, almond, eggs, sugar' }
       response_recipe_data = response.parsed_body['data']
 
       expect(response).to have_http_status(:success)
-      expect(response_recipe_data.first['id']).to eq(recipe_with_pizza_cheese_tomato.id)
+      expect(response_recipe_data.count).to eq(3)
+      expect(response_recipe_data.first['id']).to eq(swedish_kringles.id)
+      expect(response_recipe_data.second['id']).to eq(miniature_chocolate_eclairs.id)
+      expect(response_recipe_data.last['id']).to eq(classic_cinnamon_rolls.id)
     end
   end
 

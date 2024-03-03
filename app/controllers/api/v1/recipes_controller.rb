@@ -12,17 +12,22 @@ module Api
       def find
         @matching_recipes = Recipe.joins(:recipe_ingredients)
                                   .select('recipes.*, COUNT(recipe_ingredients.id) AS ingredient_count')
-                                  .where(recipe_ingredients: { ingredient_id: Ingredient.where(name: user_input_ingredients) })
+                                  .where(recipe_ingredients: { ingredient_id: matching_ingredient_ids })
                                   .group('recipes.id')
-                                  .order('ingredient_count DESC')
+                                  .order('ingredient_count DESC', 'recipes.ratings DESC')
                                   .paginate(page: params[:page], per_page: default_per_page)
-
         render json: { data: @matching_recipes,
                        meta: { total_pages: @matching_recipes.total_pages,
                                current_page: @matching_recipes.current_page } }
       end
 
       private
+
+      def matching_ingredient_ids
+        Ingredient.where('LOWER(ingredients.name) ILIKE ANY (array[?])', user_input_ingredients.map do |ingredient|
+                                                                           "%#{ingredient.downcase}%"
+                                                                         end).pluck(:id)
+      end
 
       def default_per_page
         params[:per_page] || 12
